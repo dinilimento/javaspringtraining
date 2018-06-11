@@ -18,11 +18,15 @@ public class JDBCDemo {
 
         Statement stmt = connection.createStatement();
 
+//      Low level SQL
         String sql = "SELECT * from cursist";
 
         ResultSet rs = stmt.executeQuery(sql);
 
         List<Cursist> cursisten = new ArrayList<>();
+
+//      Hier voeren we al een object relational mapping uit
+//      ORM mapping verstopt in code = lastig onderhoudbaar
         while (rs.next()){
             int id = rs.getInt("id");
             String naam = rs.getString("naam");
