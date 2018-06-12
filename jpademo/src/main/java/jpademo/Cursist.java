@@ -1,16 +1,13 @@
 package jpademo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Entity
@@ -21,5 +18,16 @@ public class Cursist {
     private int id;
     private String naam;
     private String organisatie;
+
+    public Cursist(int id, String naam, String organisatie) {
+        this.id = id;
+        this.naam = naam;
+        this.organisatie = organisatie;
+    }
+
+    @Getter(value = AccessLevel.NONE)
+    @Setter(value = AccessLevel.NONE)
+    @Version
+    private long rowversion;
 
 }
