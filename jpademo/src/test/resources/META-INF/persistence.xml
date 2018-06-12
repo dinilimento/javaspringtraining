@@ -6,6 +6,7 @@
 
     <persistence-unit name="mysql5-hibernate5-pu" transaction-type="RESOURCE_LOCAL">
     <class>jpademo.Cursist</class>
+    <class>jpademo.Diploma</class>
     <properties>
         <property name="hibernate.archive.autodetection" value="class" />
         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
@@ -14,7 +15,7 @@
         <property name="hibernate.connection.username" value="root" />
         <property name="hibernate.connection.password" value="" />
         <property name="hibernate.show_sql" value="true"/>
-        <property name="hibernate.hbm2ddl.auto" value="update" />
+        <property name="hibernate.hbm2ddl.auto" value="create" />
     </properties>
 </persistence-unit>
 </persistence>

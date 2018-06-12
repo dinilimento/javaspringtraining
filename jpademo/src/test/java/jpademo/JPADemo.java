@@ -29,16 +29,8 @@ public class JPADemo {
 
         entityManager.getTransaction().begin();
         Cursist cursist = new Cursist(1, "Timo", "NN");
-
         entityManager.persist(cursist);
-        try {
-            entityManager.getTransaction().commit();
-        }
-        catch (Exception e) {
-            entityManager.merge(cursist);
-            entityManager.getTransaction().begin();
-            entityManager.getTransaction().commit();
-        }
+        entityManager.getTransaction().commit();
     }
 
 
@@ -106,6 +98,53 @@ public class JPADemo {
         entityManager.merge(cursist);
         cursist.setNaam("Timo");
         entityManager.getTransaction().commit();
+    }
+
+    @Test
+    public void gebruikJpaOmEenCursistInDeDatabaseTeZettenWanneerDezeErAlInStaat() throws SQLException {
+
+        entityManager.getTransaction().begin();
+        Cursist cursist = new Cursist(1, "Timo", "NN");
+
+        entityManager.persist(cursist);
+        try {
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.merge(cursist);
+            entityManager.getTransaction().begin();
+            entityManager.getTransaction().commit();
+        }
+    }
+
+    @Test
+    public void voegCursistToeMetDiplomaZonderPersistDiploma() throws SQLException {
+        entityManager.getTransaction().begin();
+
+        List<Diploma> diplomaList = Arrays.asList(  new Diploma("Java Spring", 7.5),
+                                                    new Diploma("AWS", 8));
+        Cursist cursist = new Cursist(1, "Timo", "NN", diplomaList);
+
+        entityManager.persist(cursist);
+        entityManager.getTransaction().commit();
+
+    }
+
+    @Test
+    public void voegCursistToeMetDiplomaMetPersistAlles() throws SQLException {
+        entityManager.getTransaction().begin();
+
+        List<Diploma> diplomaList = Arrays.asList( new Diploma("Java Spring", 7.5),
+                new Diploma("AWS", 8));
+
+        Cursist cursist = new Cursist(1, "Timo", "NN", diplomaList);
+
+        entityManager.persist(cursist);
+        for (Diploma diploma : diplomaList) {
+            entityManager.persist(diploma);
+        }
+
+        entityManager.getTransaction().commit();
+
     }
 
     @After

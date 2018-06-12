@@ -2,10 +2,8 @@ package jpademo;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,9 +23,22 @@ public class Cursist {
         this.organisatie = organisatie;
     }
 
+    public Cursist(int id, String naam, String organisatie, List<Diploma> diplomaList) {
+        this.id = id;
+        this.naam = naam;
+        this.organisatie = organisatie;
+        this.diplomaList = diplomaList;
+        for ( Diploma diploma: this.diplomaList ) {
+            diploma.setCursist(this);
+        }
+    }
+
     @Getter(value = AccessLevel.NONE)
     @Setter(value = AccessLevel.NONE)
     @Version
     private long rowversion;
+
+    @OneToMany(mappedBy= "cursist")
+    private List<Diploma> diplomaList;
 
 }
