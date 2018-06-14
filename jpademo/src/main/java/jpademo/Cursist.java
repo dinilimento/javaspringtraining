@@ -23,14 +23,16 @@ public class Cursist {
         this.organisatie = organisatie;
     }
 
-    public Cursist(int id, String naam, String organisatie, List<Diploma> diplomaList) {
-        this.id = id;
-        this.naam = naam;
-        this.organisatie = organisatie;
+    public void setDiplomaList(List<Diploma> diplomaList){
         this.diplomaList = diplomaList;
         for ( Diploma diploma: this.diplomaList ) {
             diploma.setCursist(this);
         }
+    }
+
+    public void addDiploma(Diploma diploma){
+        diploma.setCursist(this);
+        this.diplomaList.add(diploma);
     }
 
     @Getter(value = AccessLevel.NONE)

@@ -122,7 +122,8 @@ public class JPADemo {
 
         List<Diploma> diplomaList = Arrays.asList(  new Diploma("Java Spring", 7.5),
                                                     new Diploma("AWS", 8));
-        Cursist cursist = new Cursist(1, "Timo", "NN", diplomaList);
+        Cursist cursist = new Cursist(1, "Timo", "NN");
+        cursist.setDiplomaList(diplomaList);
 
         entityManager.persist(cursist);
         entityManager.getTransaction().commit();
@@ -136,7 +137,8 @@ public class JPADemo {
         List<Diploma> diplomaList = Arrays.asList( new Diploma("Java Spring", 7.5),
                 new Diploma("AWS", 8));
 
-        Cursist cursist = new Cursist(1, "Timo", "NN", diplomaList);
+        Cursist cursist = new Cursist(1, "Timo", "NN");
+        cursist.setDiplomaList(diplomaList);
 
         entityManager.persist(cursist);
         for (Diploma diploma : diplomaList) {
